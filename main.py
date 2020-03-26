@@ -3,7 +3,11 @@ import api_func
 
 class MyClient(discord.Client):
     async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+        # Debug print for a developer to check if he streams data into right client key.
+        print('DEBUG: Bot name is: {0}'.format(self.user))
+        # Basic discord presence OUTPUT: Watching for your health ♥
+        activity = discord.Activity(name='For your health ' + '♥', type=discord.ActivityType.watching)
+        await client.change_presence(activity=activity)
 
     async def on_message(self, message):
         if message.author == self.user:
