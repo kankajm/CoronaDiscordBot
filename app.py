@@ -1,7 +1,13 @@
 import discord
 from functions import api_func
-from configs import secrets
 from functions import misc_func
+from dotenv import load_dotenv
+import os
+
+# loading env to os
+load_dotenv()
+# geting env variable form os
+SECRET_KEY = os.getenv("KEY")
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -21,4 +27,4 @@ class MyClient(discord.Client):
 
 client = MyClient()
 # Imports key from secrets because of safety on Github
-client.run(secrets.key())
+client.run(SECRET_KEY)
