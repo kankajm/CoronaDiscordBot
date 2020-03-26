@@ -1,0 +1,5 @@
+.env
+.vscode/
+bot-env/
+functions/__pycache__/
+__pycache__/
