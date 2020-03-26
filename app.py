@@ -17,9 +17,10 @@ client = commands.Bot(command_prefix='.')
 @client.event
 async def on_ready():
     print("Bot Online!")
+    print("Server is running on " + misc_func.system_is())
     print("Name: {}".format(client.user.name))
     print("ID: {}".format(client.user.id))
-    activity = discord.Activity(name='with my di(sk) xd', type=discord.ActivityType.playing)
+    activity = discord.Activity(name='.corona <country>', type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
 
 @client.command()
