@@ -1,11 +1,15 @@
 import discord
+import logging
 from functions import api_func
 from configs import secrets
 from functions import misc_func
+from logs import logging
 
 class MyClient(discord.Client):
     async def on_ready(self):
         misc_func.debug_bot_onstart(self.user)
+        # Starts making logs
+        logging.logger()
         # Basic discord presence OUTPUT: Watching for your health ♥
         activity = discord.Activity(name='For your health ' + '♥', type=discord.ActivityType.watching)
         await client.change_presence(activity=activity)
