@@ -15,7 +15,6 @@ class api():
         return [cases, deaths, recovered]
 
 
-
      # Gets data from API about one specific country. Output is array.
      # WARNING: It's important to change int to str when it's used.
     def country_corona(country):
@@ -43,5 +42,3 @@ class api():
 # print(api.country_corona("Slovakia"))
 # print(api.country_corona("Italy"))
 # print(api.country_corona("USA"))
-
-
