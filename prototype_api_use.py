@@ -2,8 +2,8 @@ import json
 import requests
 
 
-apiCall = requests.get("https://coronavirus-19-api.herokuapp.com/all")
-loadJson = json.loads(apiCall.text)
+api_call = requests.get("https://coronavirus-19-api.herokuapp.com/all")
+load_json = json.loads(apiCall.text)
 
 cases = loadJson.get('cases')
 deaths = loadJson.get('deaths')
