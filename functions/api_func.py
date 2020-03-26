@@ -16,25 +16,27 @@ class api():
 
 
      # Gets data from API about one specific country. Output is array.
-     # WARNING: It's important to change int to str when it's used.
     def country_corona(country):
-        api_call = requests.get(" https://coronavirus-19-api.herokuapp.com/countries/{}".format(country))
-        load_json = json.loads(api_call.text)
+        try:
+            api_call = requests.get("https://coronavirus-19-api.herokuapp.com/countries/{}".format(country))
+            load_json = json.loads(api_call.text)
 
-        country_name = load_json.get('country')
-        cases = load_json.get('cases')
-        today_cases = load_json.get('todayCases')
-        deaths = load_json.get('deaths')
-        today_deaths = load_json.get('todayDeaths')
-        recovered_people = load_json.get('recovered')
-        active_cases = load_json.get('active')
-        critical_cases = load_json.get('critical')
-        cases_per_one_million_citizens = load_json.get('casesPerOneMillion')
-        deaths_per_one_million_citizens = load_json.get('deathsPerOneMillion')
+            country_name = load_json.get('country')
+            cases = load_json.get('cases')
+            today_cases = load_json.get('todayCases')
+            deaths = load_json.get('deaths')
+            today_deaths = load_json.get('todayDeaths')
+            recovered_people = load_json.get('recovered')
+            active_cases = load_json.get('active')
+            critical_cases = load_json.get('critical')
+            cases_per_one_million_citizens = load_json.get('casesPerOneMillion')
+            deaths_per_one_million_citizens = load_json.get('deathsPerOneMillion')
 
-        return [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
-
-
+            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
+            return data
+        except:
+            data = "error"
+            return data
 
 # Tests --> PASSED
 # print(api.overview_corona())
