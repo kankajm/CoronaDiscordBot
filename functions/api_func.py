@@ -5,7 +5,7 @@ class api():
     # Gets data from api.
     # Returns global data in array
     def overview_corona():
-        api_call = requests.get("https://coronavirus-19-api.herokuapp.com/all")
+        api_call = requests.get("http://covid-19.jkanka.cz:36747/all")
         load_json = json.loads(api_call.text)
 
         cases = load_json.get('cases')
@@ -18,7 +18,7 @@ class api():
      # Gets data from API about one specific country. Output is array.
     def country_corona(country):
         try:
-            api_call = requests.get("https://coronavirus-19-api.herokuapp.com/countries/{}".format(country))
+            api_call = requests.get("http://covid-19.jkanka.cz:36747/countries/{}".format(country))
             load_json = json.loads(api_call.text)
 
             country_name = load_json.get('country')

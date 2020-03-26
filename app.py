@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import os
 
+# Bot version
+bot_version = "1.0"
 # loading env to os
 load_dotenv()
 # geting env variable form os
@@ -17,6 +19,7 @@ client = commands.Bot(command_prefix='.')
 @client.event
 async def on_ready():
     print("Bot Online!")
+    print("Discord.py version: " + discord.__version__)
     print("Server is running on " + misc_func.system_is())
     print("Name: {}".format(client.user.name))
     print("ID: {}".format(client.user.id))
@@ -26,6 +29,10 @@ async def on_ready():
 @client.command()
 async def ping(ctx):
     await ctx.send(f'DEBUG: Ping is {round(client.latency * 1000)}ms')
+
+@client.command()
+async def version(ctx):
+    await ctx.send(f'Bot version is: {bot_version}')
 
 @client.command()
 async def coronaoverview(ctx):
