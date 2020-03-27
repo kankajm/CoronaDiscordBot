@@ -1,3 +1,4 @@
+import platform
 import discord
 import logging
 from functions import api_func
@@ -8,10 +9,10 @@ from discord.ext import commands
 import os
 
 # Bot version
-bot_version = "1.0"
+bot_version = "1.0.1"
 # loading env to os
 load_dotenv()
-# geting env variable form os
+# getting env variable form os
 SECRET_KEY = os.getenv("KEY")
 # Default prefix of a command
 client = commands.Bot(command_prefix='.')
@@ -20,7 +21,7 @@ client = commands.Bot(command_prefix='.')
 async def on_ready():
     print("Bot Online!")
     print("Discord.py version: " + discord.__version__)
-    print("Server is running on " + misc_func.system_is())
+    print("Server is running on " + misc_func.system_is() + ", Python version: " + platform.python_version())
     print("Name: {}".format(client.user.name))
     print("ID: {}".format(client.user.id))
     activity = discord.Activity(name='.corona <country>', type=discord.ActivityType.playing)
@@ -29,6 +30,7 @@ async def on_ready():
 @client.command()
 async def ping(ctx):
     await ctx.send(f'DEBUG: Ping is {round(client.latency * 1000)}ms')
+
 
 @client.command()
 async def version(ctx):
