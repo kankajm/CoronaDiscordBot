@@ -4,8 +4,8 @@
 - [X] Show total count of infected/death/recovered ex.<.coronaoverview>
 - [X] Show for country count of infected/death/recovered ex. <.corona italy>
 - [X] Mention user in the response.
-- [ ] Make a basic log system.
 - [X] Add discord presence.
+- [ ] Make a basic log system.
 
 ## Credits and Other Project Licenses
 

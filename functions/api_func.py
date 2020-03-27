@@ -1,11 +1,19 @@
 import json
 import requests
+from configparser import ConfigParser
+
+# load config
+parser = ConfigParser()
+parser.read('./config.ini')
+
+# Get api_server link
+api_server = parser.get('API', 'api_server')
 
 class api():
     # Gets data from api.
     # Returns global data in array
     def overview_corona():
-        api_call = requests.get("http://covid-19.jkanka.cz:36747/all")
+        api_call = requests.get("{}/all".format(api_server))
         load_json = json.loads(api_call.text)
 
         cases = load_json.get('cases')
@@ -18,7 +26,7 @@ class api():
      # Gets data from API about one specific country. Output is array.
     def country_corona(country):
         try:
-            api_call = requests.get("http://covid-19.jkanka.cz:36747/countries/{}".format(country))
+            api_call = requests.get("{}/countries/{}".format(api_server, country))
             load_json = json.loads(api_call.text)
 
             country_name = load_json.get('country')
@@ -35,8 +43,7 @@ class api():
             data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
             return data
         except:
-            data = "error"
-            return data
+            return "error"
 
 # Tests --> PASSED
 # print(api.overview_corona())
