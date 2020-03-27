@@ -27,14 +27,6 @@ async def on_ready():
                                 , type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
 
-@client.command()
-async def coronaping(ctx):
-    await ctx.send(f'DEBUG: Ping is {round(client.latency * 1000)}ms')
-
-@client.command()
-async def coronaversion(ctx):
-    await ctx.send('Bot version is: {}'.format(parser.get('INFO','bot_version')))
-
 # TODO: Make parameter --details
 # TODO: Error message if it's without value
 @client.command()
@@ -44,13 +36,21 @@ async def corona(ctx, country_userinput):
             data = api_func.api.overview_corona()
             await ctx.send(f"{ctx.message.author.mention}, there's {data[0]} cases right now, {data[1]} deaths and {data[2]} people recovered from the COVID-19.")
         else:
-            # .corona <COUNTRY> prints out info about a single country of choice
-            data = api_func.api.country_corona(country_userinput)
-            if data == "error":
-                await ctx.send("You have written wrong country name or database is unavaible.")
+            # .corona ping prints out ping of connection to Dicord API
+            if country_userinput == "ping":
+                await ctx.send(f'Bots ping is {round(client.latency * 1000)}ms')
             else:
-                await ctx.send(f"{ctx.message.author.mention}"
-                               f", {data[0]} have {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered.")
+                # .corona version prints out version number
+                if country_userinput == "version":
+                    await ctx.send('Bot version is: {}'.format(parser.get('INFO', 'bot_version')))
+                else:
+                    # .corona <COUNTRY> prints out info about a single country of choice
+                    data = api_func.api.country_corona(country_userinput)
+                    if data == "error":
+                        await ctx.send("You have written wrong country name or database is unavaible.")
+                    else:
+                        await ctx.send(f"{ctx.message.author.mention}"
+                                       f", {data[0]} have {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered.")
 
 # Getting env variable form os
 SECRET_KEY = os.getenv("KEY")
