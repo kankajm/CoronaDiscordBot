@@ -44,10 +44,3 @@ class api():
             return data
         except:
             return "error"
-
-# Tests --> PASSED
-# print(api.overview_corona())
-# print()
-# print(api.country_corona("Slovakia"))
-# print(api.country_corona("Italy"))
-# print(api.country_corona("USA"))
