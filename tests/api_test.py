@@ -34,3 +34,20 @@ else:
     print("COUNTRY INFO API TEST: FAILED")
 
 
+# API COUNTRIES LIST TEST #
+api_call_countries = requests.get(f"{api_server}/countries")
+load_json_countries = json.loads(api_call_countries.text)
+
+countries = []
+
+for x in load_json_countries: countries.append(x['country'])
+
+bool_countries = "Iran" and "Switzerland" and "UK" and "Germany" in countries
+
+if bool_countries == True:
+    print("COUNTRIES NAMES API TEST: PASSED")
+else:
+    print("COUNTRIES NAMES API TEST: FAILED")
+
+
+

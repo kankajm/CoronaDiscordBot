@@ -44,3 +44,16 @@ class api():
             return data
         except:
             return "error"
+
+    def countries_corona_get_list():
+        try:
+            api_call = requests.get(f"{api_server}/countries")
+            load_json_var = json.loads(api_call.text)
+
+            countries = []
+
+            for x in load_json_var: countries.append(x['country'])
+
+            return countries
+        except:
+            return "error"
