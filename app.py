@@ -51,7 +51,7 @@ async def corona(ctx, country_userinput):
                         await ctx.send(f"{ctx.message.author.mention}"
                                        f", {data[0]} has {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered."
                                        f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
-                                       f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
+                                       f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens. First case was recognized on {data[10]}.")
 
 # Getting env variable form os
 SECRET_KEY = os.getenv("KEY")

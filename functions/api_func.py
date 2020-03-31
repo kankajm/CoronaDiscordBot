@@ -39,12 +39,16 @@ class api():
             critical_cases = load_json.get('critical')
             cases_per_one_million_citizens = load_json.get('casesPerOneMillion')
             deaths_per_one_million_citizens = load_json.get('deathsPerOneMillion')
+            first_case = load_json.get('firstCase').lstrip('\n')
 
-            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
+            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens, first_case]
+
             return data
+
         except:
             return "error"
 
+    # TODO: Still not used
     def countries_corona_get_list():
         try:
             api_call = requests.get(f"{api_server}/countries")
