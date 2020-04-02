@@ -35,9 +35,8 @@ async def corona(ctx, country_userinput):
     if country_userinput == "CZ" or country_userinput == "cz" or country_userinput == "czech" or country_userinput == "czechia" or country_userinput == "Czechia" or country_userinput == "Czech":
         data = mzcr.covid_scrap()
         data_two = api_func.api.country_corona("Czechia")
-        first_case = data_two[10].rstrip(" ")
         await ctx.send(f'According to Ministry of Health of the Czech Republic, Czechia has tested {data[2]} people. To this date Czechia have {data[3]} cases,'
-                       f' {data[5]} deaths and {data[4]} people recovered from the COVID-19. First case was detected on {first_case}. Source: http://tiny.cc/mzcr-covid , {data[0]}.')
+                       f' {data[5]} deaths and {data[4]} people recovered from the COVID-19. Today was detected {data_two[2]} cases and {data_two[4]} deaths. Source: http://tiny.cc/mzcr-covid , {data[0]}.')
     else:
         # .corona overview prints overview about the situation
         if country_userinput == "overview" or country_userinput == "world":
@@ -87,7 +86,7 @@ async def corona(ctx, country_userinput):
                                 await ctx.send(f"{ctx.message.author.mention}"
                                                f", {data[0]} has {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered."
                                                f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
-                                               f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens. First case was recognized on {data[10]}.")
+                                               f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
                             else:
                                 # .corona version prints out version number
                                 if country_userinput == "version":
@@ -102,7 +101,7 @@ async def corona(ctx, country_userinput):
                                         await ctx.send(f"{ctx.message.author.mention}"
                                                        f", {data[0]} has {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered."
                                                        f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
-                                                       f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens. First case was recognized on {data[10]}.")
+                                                       f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
 
 
 # Getting env variable form os

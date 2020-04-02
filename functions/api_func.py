@@ -39,9 +39,8 @@ class api():
             critical_cases = load_json.get('critical')
             cases_per_one_million_citizens = load_json.get('casesPerOneMillion')
             deaths_per_one_million_citizens = load_json.get('deathsPerOneMillion')
-            first_case = load_json.get('firstCase').lstrip('\n')
 
-            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens, first_case]
+            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
 
             return data
 
