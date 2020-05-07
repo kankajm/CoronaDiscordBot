@@ -13,8 +13,6 @@ parser = ConfigParser()
 parser.read('config.ini')
 # loading env to os
 load_dotenv()
-# Couter for getting number of servers bot is connected on
-guildCounter = 0
 # Default prefix of a command
 client = commands.Bot(command_prefix='{}'.format(parser.get('INFO', 'command_prefix'))
                       , case_insensitive=True)
@@ -29,11 +27,6 @@ async def on_ready():
     activity = discord.Activity(name='{}'.format(parser.get('INFO', 'activity_name'))
                                 , type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
-
-def get_guilds():
-    for guild in client.guilds:
-        guildCounter =+ 1
-    return guildCounter
 
 # TODO: Error message if it's without value
 @client.command()
@@ -96,7 +89,11 @@ async def corona(ctx, country_userinput):
                                                f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
                             else:
                                 if country_userinput == "servers":
-                                    await ctx.send(f'CoronaBot is on {get_guilds()} servers! Add him on your server too: http://tiny.cc/coronabot')
+                                    guildCounter = 0
+                                    for guild in client.guilds:
+                                        guildCounter += 1
+                                        print(guild)
+                                    await ctx.send(f'CoronaBot is on {guildCounter} servers! Add him on your server too: http://tiny.cc/coronabot')
                                 else:
                                     # .corona version prints out version number
                                     if country_userinput == "version":
