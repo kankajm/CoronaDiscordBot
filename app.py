@@ -13,6 +13,8 @@ parser = ConfigParser()
 parser.read('config.ini')
 # loading env to os
 load_dotenv()
+# Couter for getting number of servers bot is connected on
+guildCounter = 0
 # Default prefix of a command
 client = commands.Bot(command_prefix='{}'.format(parser.get('INFO', 'command_prefix'))
                       , case_insensitive=True)
@@ -27,6 +29,11 @@ async def on_ready():
     activity = discord.Activity(name='{}'.format(parser.get('INFO', 'activity_name'))
                                 , type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
+
+def get_guilds():
+    for guild in client.guilds:
+        guildCounter =+ 1
+    return guildCounter
 
 # TODO: Error message if it's without value
 @client.command()
@@ -88,20 +95,23 @@ async def corona(ctx, country_userinput):
                                                f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
                                                f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
                             else:
-                                # .corona version prints out version number
-                                if country_userinput == "version":
-                                    await ctx.send('Bot version is: {}'.format(parser.get('INFO', 'bot_version')))
+                                if country_userinput == "servers":
+                                    await ctx.send(f'CoronaBot is on {get_guilds()} servers! Add him on your server too: http://tiny.cc/coronabot')
                                 else:
-                                    # .corona <COUNTRY> prints out info about a single country of choice
-                                    data = api_func.api.country_corona(country_userinput)
-                                    if data == "error":
-                                        await ctx.send(
-                                            "You have written wrong country name or database is unavaible. Try it again.")
+                                    # .corona version prints out version number
+                                    if country_userinput == "version":
+                                        await ctx.send('Bot version is: {}'.format(parser.get('INFO', 'bot_version')))
                                     else:
-                                        await ctx.send(f"{ctx.message.author.mention}"
-                                                       f", {data[0]} has {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered."
-                                                       f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
-                                                       f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
+                                        # .corona <COUNTRY> prints out info about a single country of choice
+                                        data = api_func.api.country_corona(country_userinput)
+                                        if data == "error":
+                                            await ctx.send(
+                                                "You have written wrong country name or database is unavaible. Try it again.")
+                                        else:
+                                            await ctx.send(f"{ctx.message.author.mention}"
+                                                           f", {data[0]} has {data[1]} cases and {data[3]} deaths. Today there are {data[2]} cases and {data[4]} deaths. {data[5]} people recovered."
+                                                           f" They're still {data[6]} active cases and {data[7]} people are in critical condition."
+                                                           f" The concentration of cases in {data[0]} is {data[8]} cases per one milion citizens.")
 
 
 # Getting env variable form os
