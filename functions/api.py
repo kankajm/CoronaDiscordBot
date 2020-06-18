@@ -1,19 +1,11 @@
 import json
 import requests
-from configparser import ConfigParser
 
-# load config
-parser = ConfigParser()
-parser.read('./config.ini')
-
-# Get api_server link
-api_server = parser.get('API', 'api_server')
-
-class api():
+class api_func():
     # Gets data from api.
     # Returns global data in array
     def overview_corona():
-        api_call = requests.get("{}/all".format(api_server))
+        api_call = requests.get("{}/all".format("https://coronavirus-19-api.herokuapp.com"))
         load_json = json.loads(api_call.text)
 
         cases = load_json.get('cases')
@@ -22,11 +14,10 @@ class api():
 
         return [cases, deaths, recovered]
 
-
      # Gets data from API about one specific country. Output is array.
     def country_corona(country):
         try:
-            api_call = requests.get("{}/countries/{}".format(api_server, country))
+            api_call = requests.get("{}/countries/{}".format("https://coronavirus-19-api.herokuapp.com", country))
             load_json = json.loads(api_call.text)
 
             country_name = load_json.get('country')
@@ -39,24 +30,10 @@ class api():
             critical_cases = load_json.get('critical')
             cases_per_one_million_citizens = load_json.get('casesPerOneMillion')
             deaths_per_one_million_citizens = load_json.get('deathsPerOneMillion')
+            total_tests = load_json.get('totalTests')
+            tests_per_one_million = load_json.get('testsPerOneMillion')
 
-            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens]
-
+            data = [country_name, cases, today_cases, deaths, today_deaths, recovered_people, active_cases, critical_cases, cases_per_one_million_citizens, deaths_per_one_million_citizens, total_tests, tests_per_one_million]
             return data
-
-        except:
-            return "error"
-
-    # TODO: Still not used
-    def countries_corona_get_list():
-        try:
-            api_call = requests.get(f"{api_server}/countries")
-            load_json_var = json.loads(api_call.text)
-
-            countries = []
-
-            for x in load_json_var: countries.append(x['country'])
-
-            return countries
         except:
             return "error"

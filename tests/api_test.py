@@ -2,17 +2,10 @@ import requests
 import json
 from configparser import ConfigParser
 
-# load config
-parser = ConfigParser()
-parser.read('../config.ini')
-
-# Api server imported from config.ini
-api_server = parser.get('API', 'api_server')
-
 ################# TESTs: #################
 
 # API overview test #
-api_call_overview = requests.get("{}/all".format(api_server))
+api_call_overview = requests.get("{}/all".format("https://coronavirus-19-api.herokuapp.com"))
 load_json_overview = json.loads(api_call_overview.text)
 
 bool_overview = "cases" and "deaths" and "recovered" in load_json_overview
@@ -23,7 +16,7 @@ else:
     print("OVERVIEW TEST: FAILED")
 
 # API country info test #
-api_call_country = requests.get("{}/countries/china".format(api_server))
+api_call_country = requests.get("{}/countries/china".format("https://coronavirus-19-api.herokuapp.com"))
 load_json_country = json.loads(api_call_country.text)
 
 bool_country = "country" and "active" and "critical" in load_json_country
@@ -35,7 +28,7 @@ else:
 
 
 # API COUNTRIES LIST TEST #
-api_call_countries = requests.get(f"{api_server}/countries")
+api_call_countries = requests.get("https://coronavirus-19-api.herokuapp.com/countries")
 load_json_countries = json.loads(api_call_countries.text)
 
 countries = []
@@ -48,6 +41,3 @@ if bool_countries == True:
     print("COUNTRIES NAMES API TEST: PASSED")
 else:
     print("COUNTRIES NAMES API TEST: FAILED")
-
-
-

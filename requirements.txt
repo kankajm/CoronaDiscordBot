@@ -2,4 +2,3 @@ python-dotenv
 discord
 requests
 configparser
-bs4
