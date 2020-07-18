@@ -37,7 +37,7 @@ async def corona(ctx, args):
     if args == "help":
         embed = discord.Embed(title="Commands for the CoronaBot:", colour=discord.Color.red())
         embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
-        embed.set_footer(text="This bot is proudly written in the Czech Republic by Jaroslav Kaňka and Ondřej Štěch.",
+        embed.set_footer(text="Created by Jaroslav Kaňka (kanka@jkanka.cz or kankaj#1973)",
                          icon_url="https://jkanka.cz/ikonka.png")
         embed.add_field(name="To show total numbers from countries all around the world use:",
                         value=".corona overview")
