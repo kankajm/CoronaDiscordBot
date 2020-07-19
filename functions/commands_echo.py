@@ -19,7 +19,7 @@ class commands:
         return ", {} Source: http://tiny.cc/WHOLINK , WHO.".format(data_string)
 
     def getInviteLinkMessage():
-        return ", to invite this bot on your server use: http://tiny.cc/coronabot"
+        return ", to invite this bot on your server use: https://shorturl.at/fprIN"
 
     def getKoreaFixedCoronaData():
         data = api.api_func.country_corona("S. Korea")

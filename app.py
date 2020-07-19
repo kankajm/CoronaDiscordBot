@@ -62,7 +62,7 @@ async def corona(ctx, args):
         guild_counter = 0
         for guild in client.guilds:
             guild_counter += 1
-        await ctx.send("CoronaBot is on {} servers! Add him on your server too: http://tiny.cc/coronabot".format(guild_counter))
+        await ctx.send("CoronaBot is on {} servers! Add him on your server too: https://shorturl.at/fprIN".format(guild_counter))
     if args == "version":
         await ctx.send('Bot version is: {}'.format(parser.get('INFO', 'bot_version')))
     if args == "S.Korea":
